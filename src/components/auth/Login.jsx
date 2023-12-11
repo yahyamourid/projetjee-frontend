@@ -21,12 +21,22 @@ const Login = () => {
   };
   const submit = async()=>{
     console.log(user)
-    const res = await axios.post("http://localhost:8080/api/users/login",user)
-    console.log(res.data)
-    // setUser({
+   
+    try {
+      const res = await axios.post("http://localhost:8080/api/users/login",user)
+      console.log(res.data)
+      localStorage.setItem("userlogin",JSON.stringify(res.data))
+      // setUser({
     //   email:"",
     //   password:""
     // })
+    // console.log(JSON.parse(localStorage.getItem("userlogin")).user.role)
+    const role = res.data.user.role
+    window.location = role
+    } catch (error) {
+      console.log(error.response.data)
+    }
+    
   }
 
   return (
@@ -39,7 +49,7 @@ const Login = () => {
             <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Sign in</h1>
             <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
               Don't have an account yet?
-              <a class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="../examples/html/signup.html">
+              <a class="text-blue-600 ml-2 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="../examples/html/signup.html">
                 Sign up here
               </a>
             </p>
