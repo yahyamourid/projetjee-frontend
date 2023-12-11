@@ -23,7 +23,7 @@ const Login = () => {
     console.log(user)
    
     try {
-      const res = await axios.post("http://localhost:8080/api/users/login",user)
+      const res = await axios.post("http://localhost:3030/api/users/login",user)
       console.log(res.data)
       localStorage.setItem("userlogin",JSON.stringify(res.data))
       // setUser({
